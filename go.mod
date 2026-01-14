@@ -1,4 +1,4 @@
-module github.com/pairbytes-dev/tripsplit-monorepo/tree/dev
+module github.com/pairbytes-dev/tripsplit-monorepo
 
 go 1.25.0
 
