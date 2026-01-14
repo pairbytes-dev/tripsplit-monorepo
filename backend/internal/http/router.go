@@ -17,6 +17,7 @@ func NewRouter(gormDB *gorm.DB) *gin.Engine {
 		authGroup := v1.Group("/auth")
 		{
 			authGroup.POST("/register", authHandler.Register)
+			authGroup.POST("/login", authHandler.Login)
 		}
 	}
 
