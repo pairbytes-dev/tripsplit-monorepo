@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: tripsplit
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: tripsplit
       POSTGRES_DB: tripsplit
     ports:
       - "5432:5432"

@@ -1,6 +1,7 @@
 package http
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -36,6 +37,7 @@ func (h *AuthHandler) Register(c *gin.Context) {
 	}
 
 	if err := h.users.Create(c.Request.Context(), u); err != nil {
+		log.Println("Error creating user:", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "could not create user"})
 		return
 	}
