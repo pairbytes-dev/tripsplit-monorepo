@@ -1,6 +1,18 @@
 package user
 
-import "github.com/pairbytes-dev/tripsplit-monorepo/tree/dev/backend/internal/security"
+import (
+	"errors"
+	"strings"
+	"unicode"
+
+	"github.com/pairbytes-dev/tripsplit-monorepo/tree/dev/backend/internal/security"
+)
+
+var (
+	ErrInvalidName  = errors.New("O nome é necessário")
+	ErrInvalidEmail = errors.New("O email é necessário")
+	ErrWeakPassword = errors.New("A senha precisa ter pelo menons 8 caracteres e conter letras e números")
+)
 
 type User struct {
 	ID           int64
@@ -11,6 +23,23 @@ type User struct {
 }
 
 func NewUser(id int64, name, email, rawPassword string) (*User, error) {
+	name = strings.TrimSpace(name)
+	email = strings.TrimSpace(strings.ToLower(email))
+
+	if name == "" {
+		return nil, ErrInvalidName
+	}
+	if email == "" {
+		return nil, ErrInvalidEmail
+	}
+	if rawPassword == "" || len(rawPassword) < 8 {
+		return nil, ErrWeakPassword
+	}
+
+	if !isStrongPassword(rawPassword) {
+		return nil, ErrWeakPassword
+	}
+
 	hashed, err := security.HashPassword(rawPassword)
 	if err != nil {
 		return nil, err
@@ -23,4 +52,24 @@ func NewUser(id int64, name, email, rawPassword string) (*User, error) {
 		PasswordHash: hashed,
 		IsActive:     true,
 	}, nil
+
+}
+
+func isStrongPassword(p string) bool {
+	if len(p) < 8 {
+		return false
+	}
+
+	hasLetter := false
+	hasDigit := false
+
+	for _, r := range p {
+		if unicode.IsLetter(r) {
+			hasLetter = true
+		}
+		if unicode.IsDigit(r) {
+			hasDigit = true
+		}
+	}
+	return hasLetter && hasDigit
 }
