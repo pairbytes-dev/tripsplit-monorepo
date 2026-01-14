@@ -9,6 +9,7 @@ import (
 	"github.com/pairbytes-dev/tripsplit-monorepo/backend/internal/db"
 )
 
+// Handler de autenticação
 type AuthHandler struct {
 	users *db.UserRepository
 }
@@ -17,10 +18,11 @@ func NewAuthHandler(users *db.UserRepository) *AuthHandler {
 	return &AuthHandler{users: users}
 }
 
+// Payload de registro
 type registerRequest struct {
 	Name     string `json:"name" binding:"required"`
-	Email    string `json:"email" bindig:"required,email"`
-	Password string `jsonn:"password" binding:"required,min=8"`
+	Email    string `json:"email" binding:"required,email"`
+	Password string `json:"password" binding:"required,min=8"`
 }
 
 func (h *AuthHandler) Register(c *gin.Context) {
@@ -43,9 +45,11 @@ func (h *AuthHandler) Register(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusCreated, gin.H{
-		"id":    u.ID,
-		"name":  u.Name,
-		"email": u.Email,
+		"message": "Usuário criado com sucesso",
+		"user": gin.H{
+			"id":    u.ID,
+			"name":  u.Name,
+			"email": u.Email,
+		},
 	})
-
 }

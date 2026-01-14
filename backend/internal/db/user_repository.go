@@ -2,35 +2,20 @@ package db
 
 import (
 	"context"
-	"database/sql"
-	"time"
 
 	"github.com/pairbytes-dev/tripsplit-monorepo/backend/internal/core/user"
+	"gorm.io/gorm"
 )
 
 type UserRepository struct {
-	db *sql.DB
+	db *gorm.DB
 }
 
-func NewUserRepository(db *sql.DB) *UserRepository {
+func NewUserRepository(db *gorm.DB) *UserRepository {
 	return &UserRepository{db: db}
 }
 
 func (r *UserRepository) Create(ctx context.Context, u *user.User) error {
-	query := `
-	INSERT INTO users (name, email, password_hash, is_active)
-	VALUES ($1, $2, $3, $4)
-	RETURNING id;
-	`
-	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
-	defer cancel()
-
-	return r.db.QueryRowContext(
-		ctx,
-		query,
-		u.Name,
-		u.Email,
-		u.PasswordHash,
-		u.IsActive,
-	).Scan(&u.ID)
+	m := user.ToModel(u)
+	return r.db.WithContext(ctx).Create(m).Error
 }

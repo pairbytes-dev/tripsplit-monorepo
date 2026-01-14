@@ -1,26 +1,24 @@
 package http
 
 import (
-	"database/sql"
-
 	"github.com/gin-gonic/gin"
 	"github.com/pairbytes-dev/tripsplit-monorepo/backend/internal/db"
+	"gorm.io/gorm"
 )
 
-func NewRouter(conn *sql.DB) *gin.Engine {
+func NewRouter(gormDB *gorm.DB) *gin.Engine {
 	r := gin.Default()
 
-	userRepo := db.NewUserRepository(conn)
+	userRepo := db.NewUserRepository(gormDB)
 	authHandler := NewAuthHandler(userRepo)
 
-	v1 := r.Group("/V1")
+	v1 := r.Group("/v1")
 	{
-		auth := v1.Group("/auth")
+		authGroup := v1.Group("/auth")
 		{
-			auth.POST("/register", authHandler.Register)
+			authGroup.POST("/register", authHandler.Register)
 		}
 	}
 
 	return r
-
 }

@@ -35,7 +35,6 @@ func NewUser(id int64, name, email, rawPassword string) (*User, error) {
 	if rawPassword == "" || len(rawPassword) < 8 {
 		return nil, ErrWeakPassword
 	}
-
 	if !isStrongPassword(rawPassword) {
 		return nil, ErrWeakPassword
 	}
@@ -52,7 +51,6 @@ func NewUser(id int64, name, email, rawPassword string) (*User, error) {
 		PasswordHash: hashed,
 		IsActive:     true,
 	}, nil
-
 }
 
 func isStrongPassword(p string) bool {
@@ -72,4 +70,42 @@ func isStrongPassword(p string) bool {
 		}
 	}
 	return hasLetter && hasDigit
+}
+
+type UserModel struct {
+	ID           int64  `gorm:"primaryKey;autoIncrement"`
+	Name         string `gorm:"not null"`
+	Email        string `gorm:"not null;uniqueIndex"`
+	PasswordHash string `gorm:"not null"`
+	IsActive     bool   `gorm:"not null;default:true"`
+}
+
+func (UserModel) TableName() string {
+	return "users"
+}
+
+func ToModel(u *User) *UserModel {
+	if u == nil {
+		return nil
+	}
+	return &UserModel{
+		ID:           u.ID,
+		Name:         u.Name,
+		Email:        u.Email,
+		PasswordHash: u.PasswordHash,
+		IsActive:     u.IsActive,
+	}
+}
+
+func ToDomain(m *UserModel) *User {
+	if m == nil {
+		return nil
+	}
+	return &User{
+		ID:           m.ID,
+		Name:         m.Name,
+		Email:        m.Email,
+		PasswordHash: m.PasswordHash,
+		IsActive:     m.IsActive,
+	}
 }
