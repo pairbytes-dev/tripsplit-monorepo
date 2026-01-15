@@ -6,6 +6,7 @@ import (
 	"time"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
+	"github.com/pairbytes-dev/tripsplit-monorepo/backend/internal/core/user"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -17,6 +18,11 @@ type Config struct {
 	Password string
 	DBName   string
 	SSLMode  string
+}
+
+type UserRepositoryInterface interface {
+	Create(ctx context.Context, u *user.User) error
+	GetByEmail(ctx context.Context, email string) (*user.User, error)
 }
 
 func OpenGormPostgres(cfg Config) (*gorm.DB, error) {
