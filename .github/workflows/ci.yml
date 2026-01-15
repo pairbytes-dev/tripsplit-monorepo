@@ -3,9 +3,9 @@ name: CI
 on:
   push:
     branches: [ main, dev ]
-  pull_request: 
+  pull_request:
     branches: [ main, dev ]
-  
+
 jobs:
   backend-tests:
     name: Backend (Go) tests
@@ -13,31 +13,31 @@ jobs:
 
     defaults:
       run:
-        working-directory: backend
+        working-directory: ./
 
     steps:
       - name: Checkout repository
-        uses: actions/Checkout@v4
+        uses: actions/checkout@v4
 
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.25'
+          go-version-file: go.mod
 
       - name: Download Go modules
-        run: go mod Download
+        run: go mod download
 
       - name: Run Go tests
-        run: go test ./...
+        run: go test ./backend/...
 
   frontend-tests:
-    name: Fronted (React) tests
+    name: Frontend (React) tests
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        working-directory: frontend
-      
+        working-directory: ./frontend
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -45,13 +45,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24'
-        
+          node-version: '24'       # ajuste para a versão que o projeto usa [web:816]
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Run build
         run: npm run build
-      
+
       - name: Run tests
-        run: npm test -- --watch-false
+        run: npm test -- --watch=false
