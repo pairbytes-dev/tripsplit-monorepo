@@ -12,10 +12,10 @@ import (
 
 // Handler de autenticação
 type AuthHandler struct {
-	users *db.UserRepository
+	users db.UserRepositoryInterface
 }
 
-func NewAuthHandler(users *db.UserRepository) *AuthHandler {
+func NewAuthHandler(users db.UserRepositoryInterface) *AuthHandler {
 	return &AuthHandler{users: users}
 }
 
