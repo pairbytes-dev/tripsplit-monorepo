@@ -1,0 +1,78 @@
+div.login-container{
+    background-color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 30px;
+    width: 30vw;
+
+    font-family: var(--text);
+
+    display: grid;
+    gap: 25px;
+}
+
+.login-title{
+    text-align: center;
+}
+
+.login-title h1{
+    font-family: var(--title);
+    font-weight: 400;
+    font-size: 2.2rem;
+    padding: 10px 0px 12px 0px;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 18px; 
+    padding: 10px; 
+}
+
+form label{
+    font-size: 1.1rem;    
+}   
+
+form input{
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    border: 1px solid var(--light-gray);
+}
+
+form input:focus{
+    outline: none;
+    border: 2px solid var(--green);
+}
+
+form .btn{
+    margin-top: 25px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    background-color: var(--green);
+    border: none;
+    cursor: pointer;
+}
+
+.login-text{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px 0px;
+}
+
+.login-text a{
+    color: var(--dark-gray);
+    text-decoration: none;  
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.login-text a:hover{
+    color: var(--dark-green);
+}
