@@ -1,40 +1,81 @@
-div.login-container{
-    background-color: white;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    padding: 30px;
-    width: 30vw;
+main.login-container{
+    /* background-color: #ACD0BD; */
+    width: 100vw;
+    height: 100vh;
 
     font-family: var(--text);
 
     display: grid;
-    gap: 25px;
+    grid-template-columns: 1fr 2fr;
 }
+
+.login-info{
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+
+    padding: 0px 30px;
+}
+
+.login-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.img-logo{
+    width: 80px;
+    height: auto;
+}
+
+.btn-link{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-link img{
+    width: 25px;
+    height: 25px;
+}
+
+/*animação seta*/
 
 .login-title{
     text-align: center;
+    margin-bottom: 8px;
 }
 
 .login-title h1{
     font-family: var(--title);
     font-weight: 400;
     font-size: 2.2rem;
-    padding: 10px 0px 12px 0px;
+    padding-bottom: 12px;
+    
+}
+
+.login-form{
+    width: 100%;
 }
 
 .form{
     display: flex;
     flex-direction: column;
-    gap: 18px; 
-    padding: 10px; 
+    gap: 10px;
 }
-
+   
 form label{
     font-size: 1.1rem;    
 }   
 
 form input{
-    padding: 12px;
+    padding: 10px;
     border-radius: 8px;
     font-size: 1rem;
     border: 1px solid var(--light-gray);
@@ -45,17 +86,40 @@ form input:focus{
     border: 2px solid var(--green);
 }
 
+.input-wrapper{
+  position: relative;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.input-wrapper input{
+  width: 100%;
+  height: 44px;
+  padding-left: 40px;
+}
+
+.icon-input{
+  position: absolute;
+  left: 12px;   
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: var(--light-gray);
+  pointer-events: none;
+}
+
 form .btn{
-    margin-top: 25px;
+    margin-top: 20px;
     padding: 12px;
     border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1rem;
     color: white;
     background-color: var(--green);
     border: none;
     cursor: pointer;
 }
+
+/*animação do botão (alterar cor e tamanho quando clica)*/
 
 .login-text{
     text-align: center;
@@ -63,16 +127,29 @@ form .btn{
     justify-content: center;
     flex-direction: column;
     gap: 20px;
-    padding: 10px 0px;
+    padding-top: 30px;
 }
 
-.login-text a{
+.login-text p, .login-text a{
     color: var(--dark-gray);
-    text-decoration: none;  
     font-size: 0.9rem;
     font-weight: 600;
 }
 
+.login-text a{
+    text-decoration: none;   
+}
+
 .login-text a:hover{
     color: var(--dark-green);
+}
+
+.login-img{
+    overflow: hidden;
+}
+
+.background-img{
+    width: 100%;    
+    object-fit: cover;
+    object-position: center;
 }
