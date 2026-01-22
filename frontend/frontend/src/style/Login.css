@@ -1,5 +1,5 @@
 main.login-container{
-    /* background-color: #ACD0BD; */
+    background-color: #ACD0BD;
     width: 100vw;
     height: 100vh;
 
@@ -43,9 +43,13 @@ main.login-container{
 .btn-link img{
     width: 25px;
     height: 25px;
+
+    transition: all 0.4s ease-in-out;
 }
 
-/*animação seta*/
+.btn-link img:hover{
+    transform: translateY(-2px);
+}
 
 .login-title{
     text-align: center;
@@ -117,9 +121,18 @@ form .btn{
     background-color: var(--green);
     border: none;
     cursor: pointer;
+
+    transition: all 0.2s ease-in-out;
 }
 
-/*animação do botão (alterar cor e tamanho quando clica)*/
+.btn:hover{
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.btn:active{
+  transform: scale(0.98);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
 
 .login-text{
     text-align: center;

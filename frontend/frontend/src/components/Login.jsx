@@ -1,6 +1,6 @@
 import imgLogo from '../assets/logo.png';
 import imgArrow from '../assets/left-arrow.svg';
-import background from '../assets/bg.png';
+import background from '../assets/bg.jpeg';
 
 const Login = () => {
     return(
