@@ -1,5 +1,5 @@
-main.login-container{
-    background-color: #ACD0BD;
+main.login-main{
+    background-color: #ACD8BD;
     width: 100vw;
     height: 100vh;
 
@@ -9,14 +9,13 @@ main.login-container{
     grid-template-columns: 1fr 2fr;
 }
 
-.login-info{
+section.login-info{
     background-color: white;
 
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 3rem;
 
     padding: 0px 30px;
 }
@@ -26,7 +25,6 @@ main.login-container{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
 }
 
 .img-logo{
@@ -49,6 +47,12 @@ main.login-container{
 
 .btn-link img:hover{
     transform: translateY(-2px);
+}
+
+.login-content{
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
 }
 
 .login-title{
