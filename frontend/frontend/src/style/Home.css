@@ -1,5 +1,6 @@
 main.home-main{
-    background-color: rgb(108, 182, 255);
+    background: #dfefff url(../assets/home-bg.jpeg) no-repeat center center fixed;
+    background-size: cover;
     width: 100vw;
     height: 100vh;
 
@@ -70,4 +71,24 @@ div.div-home-start{
 
 .section-start{
     padding: 5px 3.3rem;
+}
+
+.first-txt-home{
+    font-family: var(--title);
+    color: var(--dark-gray);
+    font-weight: 400;
+    font-size: 3.3rem;
+    margin-bottom: 40px;
+}
+
+.second-txt-home{
+    font-family: var(--text);
+    color: var(--dark-gray);
+    font-size: 1.2rem;
+    text-align: justify;
+    margin-bottom: 40px;
+}
+
+#start-now{
+    margin-left: 0px;
 }
