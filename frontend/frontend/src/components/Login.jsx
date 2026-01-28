@@ -1,6 +1,6 @@
-import imgLogo from '../assets/logo.png';
-import imgArrow from '../assets/left-arrow.svg';
-import background from '../assets/bg.jpeg';
+import imgLogo from '../assets/img/logo.png';
+import imgArrow from '../assets/img/left-arrow.svg';
+import background from '../assets/img/bg.jpeg';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 

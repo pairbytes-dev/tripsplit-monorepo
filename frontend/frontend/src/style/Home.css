@@ -1,5 +1,5 @@
 main.home-main{
-    background: #dfefff url(../assets/home-bg.jpeg) no-repeat center center fixed;
+    background: #dfefff url(../assets/img/home-bg.jpeg) no-repeat center center fixed;
     background-size: cover;
     width: 100vw;
     height: 100vh;
@@ -76,7 +76,7 @@ div.div-home-start{
 .first-txt-home{
     font-family: var(--title);
     color: var(--dark-gray);
-    font-weight: 400;
+    font-weight: 500;
     font-size: 3.3rem;
     margin-bottom: 40px;
 }
@@ -91,4 +91,64 @@ div.div-home-start{
 
 #start-now{
     margin-left: 0px;
+}
+
+.expenses-start{
+    background-color: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 2px 7px #00000026;
+}
+
+.expenses-div-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 18px 0;
+}
+
+.expenses-div-txt > p{
+    font-family: var(--text);
+    margin: 10px 0;
+}
+
+.gray-text{
+    color: var(--gray);
+    font-size: 13px;
+}
+
+#valor{
+    color: var(--green);
+    font-weight: 400;
+    text-align: right;
+}
+
+.expenses-div-items{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 15px 14px;
+    background-color: #c9c9c432;
+    border-radius: 12px;
+    margin-bottom: 18px;
+}
+
+.items-icon{
+    margin-right: 14px;
+    background-color: #4fb3e865;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.items-price{
+    margin-left: auto;
+}
+
+#final-value{
+    margin-top: 25px;
+}
+
+#final-value > p:nth-child(2){
+    color: var(--green);
+    font-weight: 500;
 }
