@@ -1,4 +1,4 @@
-const SignIn = () => {
+const SignIn = ({ irParaCadastro }) => {
     return(
         <div className="login-content">     
             <div className="login-title">
@@ -21,7 +21,7 @@ const SignIn = () => {
                 </form>
             </div>
             <div className="login-text">
-                <p>Não tem uma conta?<a href="#"> Cadastre-se</a></p>
+                <p>Não tem uma conta?<a href="#" onClick={irParaCadastro}>Cadastre-se</a></p>
                 <a href="#" className="password-text">Esqueceu sua senha?</a>
             </div>
         </div>

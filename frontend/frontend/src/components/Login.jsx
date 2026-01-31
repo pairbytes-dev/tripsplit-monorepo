@@ -4,19 +4,18 @@ import background from '../assets/img/bg.jpeg';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 
-const Login = () => {
+const Login = ({children}) => {
     return(
         <main className="login-main">
             <section className="login-info"> 
                 <div className="login-header">
                     <img src={imgLogo} alt="Logo" className='img-logo'/>
                     <button className='btn-link'>
-                        <img src={imgArrow} alt="Voltar" />
+                        <img src={imgArrow} alt="Voltar"/>
                     </button>
-                </div>     
+                </div>
 
-                {/* <SignIn /> */}
-                <SignUp />
+               {children}
 
             </section>
             <section className="login-img">

@@ -1,6 +1,6 @@
 import items from "../../assets/javascript/script";
 
-const HomeStart = () => {
+const HomeStart = ({ irParaCadastro }) => {
     return (
       <div className="div-home-start">
         <section className="section-start">
@@ -13,9 +13,7 @@ const HomeStart = () => {
             transparente. Registre gastos, veja relatórios em tempo real e
             acerte as contas em segundos.
           </p>
-          <button className="btn-home" id="start-now">
-            Começar agora
-          </button>
+          <button className="btn-home" id="start-now" onClick={irParaCadastro}>Começar agora</button>
         </section>
         <section className="section-start">
           <div className="expenses-start">

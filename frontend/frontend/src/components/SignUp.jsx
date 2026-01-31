@@ -1,4 +1,4 @@
-const SignUp = () => {
+const SignUp = ({irParaLogin}) => {
     return(
         <div className="login-content">     
             <div className="login-title">
@@ -26,7 +26,7 @@ const SignUp = () => {
                 </form>
             </div>
             <div className="login-text">
-                <p>Já tem uma conta?<a href=""> Faça login</a></p>
+                <p>Já tem uma conta? <a href="#" onClick={irParaLogin}>Entrar</a></p>
             </div>
         </div>
     )
