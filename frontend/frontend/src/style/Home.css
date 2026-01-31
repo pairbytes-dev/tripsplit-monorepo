@@ -13,6 +13,8 @@ header.home-header{
     height: 80px;
     padding: 5px 30px;
 
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.121);
+
     display: flex;
     justify-content: space-between;
 }

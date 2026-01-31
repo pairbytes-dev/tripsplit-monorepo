@@ -22,16 +22,14 @@ function App() {
       )}
 
       {tela === 'signin' && (
-        <Login>
+        <Login irParaHome={() => setTela("home")}>
           <SignIn irParaCadastro={() => setTela("signup")} />
-          {/* <Home irParaHome={() => setTela("home")}/> */}
         </Login>
       )}
 
       {tela === "signup" && (
-        <Login>
+        <Login irParaHome={() => setTela("home")}>
           <SignUp irParaLogin={() => setTela("signin")} />
-          {/* <Home irParaHome={() => setTela("home")}/> */}
         </Login>
       )}
      </>

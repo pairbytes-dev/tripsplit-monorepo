@@ -26,7 +26,7 @@ const SignUp = ({irParaLogin}) => {
                 </form>
             </div>
             <div className="login-text">
-                <p>Já tem uma conta? <a href="#" onClick={irParaLogin}>Entrar</a></p>
+                <p>Já tem uma conta?<span onClick={irParaLogin}> Entrar</span></p>
             </div>
         </div>
     )

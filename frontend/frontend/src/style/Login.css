@@ -147,17 +147,17 @@ form .btn{
     padding-top: 30px;
 }
 
-.login-text p, .login-text a{
+.login-text p, .login-text a, .login-text span{
     color: var(--dark-gray);
     font-size: 0.9rem;
     font-weight: 600;
 }
 
-.login-text a{
+.login-text a, .login-text span{
     text-decoration: none;   
 }
 
-.login-text a:hover{
+.login-text a:hover, .login-text span{
     color: var(--dark-green);
 }
 
