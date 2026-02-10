@@ -9,7 +9,7 @@ const SignUp = ({irParaLogin}) => {
         e.preventDefault();
 
         try{
-            const response = await fetch('http://localhost:5173/api/auth/login', {
+            const response = await fetch('http://localhost:8080/v1/auth/register', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ name, email, senha }),
