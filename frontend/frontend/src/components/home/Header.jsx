@@ -4,8 +4,8 @@ const Header = ({ irParaLogin, irParaCadastro }) => {
     return (
         <header className='home-header'>
             <div className='div-header'>
-                <img src={imgLogo} alt="Logo TripSplit" className='logo-home'/>
-                <h1 className='title'>Trip<span>Split</span></h1>
+                <img src={imgLogo} alt="Logo TripSplit" className='logo-home'/> {/* <-- ALTERAR --> */}
+                <h1 className='title'>Trip<span>Split</span></h1> {/* <-- ALTERAR --> */}
             </div>
             <div className='div-header'>
                 <button className='btn-home' id='btn-login' onClick={irParaLogin}>Login</button>

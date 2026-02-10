@@ -10,17 +10,17 @@ const SignUp = ({irParaLogin}) => {
                     <label htmlFor="name">Nome completo</label>
                     <div className="input-wrapper">
                         <i class="fa-regular fa-user icon-input"></i>
-                        <input type="text" name="name" id="name" placeholder="Digite seu nome completo"/>
+                        <input type="text" name="name" id="name" placeholder="Digite seu nome completo" required/>
                     </div>
                     <label htmlFor="email">Email</label>
                     <div className='input-wrapper'>
                         <i class="fa-regular fa-envelope icon-input"></i>
-                        <input type="email" name="email" id="email" placeholder="Digite seu email"/>
+                        <input type="email" name="email" id="email" placeholder="Digite seu email" required/>
                     </div>
                     <label htmlFor="senha">Senha</label>
                     <div className="input-wrapper">
                         <i class="fa-solid fa-lock icon-input"></i>
-                        <input type="password" name="senha" id="senha" placeholder="Digite sua senha"/>
+                        <input type="password" name="senha" id="senha" placeholder="Digite sua senha" required/>
                     </div>
                     <button type="submit" className="btn">Criar conta</button>
                 </form>
