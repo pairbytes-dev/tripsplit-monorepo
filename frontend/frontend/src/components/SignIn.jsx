@@ -8,10 +8,10 @@ const SignIn = ({ irParaCadastro }) => {
         e.preventDefault();
 
         try{
-            const response = await fetch('/v1/auth/login', {
+            const response = await fetch('http://localhost:8080/v1/auth/login', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ email, senha }),
+                body: JSON.stringify({ email, password: senha }),
             });
 
             const data = await response.json();
