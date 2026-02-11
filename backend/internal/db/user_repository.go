@@ -3,7 +3,7 @@ package db
 import (
 	"context"
 
-	"github.com/pairbytes-dev/tripsplit-monorepo/backend/internal/core/user"
+	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/user"
 	"gorm.io/gorm"
 )
 

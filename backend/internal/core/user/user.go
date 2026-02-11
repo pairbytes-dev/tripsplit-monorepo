@@ -5,7 +5,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/pairbytes-dev/tripsplit-monorepo/backend/internal/security"
+	"github.com/pairbytes-dev/tripsplit-monorepo/internal/security"
 )
 
 var (

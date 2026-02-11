@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/pairbytes-dev/tripsplit-monorepo/backend/internal/db"
+	"github.com/pairbytes-dev/tripsplit-monorepo/internal/db"
 	"gorm.io/gorm"
 )
 

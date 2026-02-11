@@ -6,9 +6,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/pairbytes-dev/tripsplit-monorepo/backend/internal/core/user"
-	"github.com/pairbytes-dev/tripsplit-monorepo/backend/internal/db"
-	httpapi "github.com/pairbytes-dev/tripsplit-monorepo/backend/internal/http"
+	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/user"
+	"github.com/pairbytes-dev/tripsplit-monorepo/internal/db"
+	httpapi "github.com/pairbytes-dev/tripsplit-monorepo/internal/http"
 )
 
 func main() {

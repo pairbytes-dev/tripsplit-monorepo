@@ -12,8 +12,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pairbytes-dev/tripsplit-monorepo/backend/internal/core/user"
-	"github.com/pairbytes-dev/tripsplit-monorepo/backend/internal/security"
+	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/user"
+	"github.com/pairbytes-dev/tripsplit-monorepo/internal/security"
 )
 
 // fake de UserRepository para os testes
