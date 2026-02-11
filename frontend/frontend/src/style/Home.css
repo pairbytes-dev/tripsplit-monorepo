@@ -32,16 +32,17 @@ div.div-header{
     color: var(--blue);
     font-family: var(--title);
     font-weight: 400;
-    font-size: 2rem;
+    font-size: 2.3rem;
+    margin-left: 10px;
 }
 
 .title span{
-    color: var(--green);
+    color: var(--light-blue);
 }
 
 .btn-home{
-    border: 2px solid var(--light-green);
-    background-color: var(--light-green);
+    border: 2px solid var(--light-blue);
+    background-color: var(--light-blue);
     color: white;
     border-radius: 8px;
     padding: 8px 10px;
@@ -55,7 +56,7 @@ div.div-header{
 
 .btn-home#btn-login{
     background-color: white;
-    color: var(--light-green);
+    color: var(--light-blue);
 }
 
 .btn-home:hover{
@@ -120,7 +121,7 @@ div.div-home-start{
 }
 
 #valor{
-    color: var(--green);
+    color: var(--blue);
     font-weight: 400;
     text-align: right;
 }
@@ -151,6 +152,6 @@ div.div-home-start{
 }
 
 #final-value > p:nth-child(2){
-    color: var(--green);
+    color: var(--blue);
     font-weight: 500;
 }

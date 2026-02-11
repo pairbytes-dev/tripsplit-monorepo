@@ -10,7 +10,6 @@ import SignUp from "./components/SignUp";
 
 function App() {
   const [tela, setTela] = useState('home');
-  console.log("Tela atual:", tela);
 
   return (
      <>

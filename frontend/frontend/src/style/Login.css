@@ -15,7 +15,7 @@ section.login-info{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 3rem;
+    gap: 2.3rem;
 
     padding: 0px 30px;
 }
@@ -28,7 +28,7 @@ section.login-info{
 }
 
 .img-logo{
-    width: 80px;
+    width: 90px;
     height: auto;
 }
 
@@ -95,7 +95,7 @@ form input:focus{
 }
 
 p.error-message{
-    color: var(--dark-gray);
+    color: red;
     font-size: 0.8rem;
 }
 
@@ -159,7 +159,8 @@ form .btn{
 }
 
 .login-text a, .login-text span{
-    text-decoration: none;   
+    text-decoration: none; 
+    cursor: pointer;  
 }
 
 .login-text a:hover, .login-text span{

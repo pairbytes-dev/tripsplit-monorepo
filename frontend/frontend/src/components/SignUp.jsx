@@ -5,13 +5,19 @@ const SignUp = ({irParaLogin}) => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
+    const tamSenha = senha.length >= 8;
+    const numberRegex = /\d/.test(senha);
+    const letterRegex = /[a-zA-Z]/.test(senha);
+
+    const isSenhaValida = tamSenha && numberRegex && letterRegex;
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (senha.length > 0 && senha.length < 8) {
-            console.log("A senha deve conter no mínimo 8 caracteres.");
-            return;
-        }
+        // if (senha.length > 0 && senha.length < 8) {
+        //     console.log("A senha deve conter no mínimo 8 caracteres.");
+        //     return;
+        // }
 
         console.log('Enviando:', { name, email, password: senha });
 
@@ -31,7 +37,7 @@ const SignUp = ({irParaLogin}) => {
             if (!response.ok) {
             const text = await response.text();
             console.error('Erro server:', text || response.statusText);
-            alert(text || `Erro ${response.status}`);
+            console.log(text || `Erro ${response.status}`);
             return;
         }
 
@@ -39,11 +45,11 @@ const SignUp = ({irParaLogin}) => {
             console.log(data);
 
             localStorage.setItem("token", data.token);
-            alert("Cadastro bem-sucedido!");
+            console.log("Cadastro bem-sucedido!");
 
         } catch(error){
             console.error("Erro no cadastro:", error);
-            alert("Não foi possível conectar ao servidor. Tente novamente.");
+            console.log("Não foi possível conectar ao servidor. Tente novamente.");
         }  
     }
 
@@ -73,9 +79,9 @@ const SignUp = ({irParaLogin}) => {
                         <input type="password" name="senha" id="senha" placeholder="Digite sua senha" 
                             value={senha} onChange={(e) => setSenha(e.target.value)} required />
                     </div>  
-                        {senha.length > 0 && (
+                        {senha.length > 0 && !isSenhaValida && (
                             <p className="error-message">
-                            {senha.length >= 8 ? "" : "A senha precisa ter pelo menos 8 caracteres"}
+                            A senha precisa ter pelo menos 8 caracteres incluindo letras e números.
                             </p>
                         )}
                     <button type="submit" className="btn">Criar conta</button>

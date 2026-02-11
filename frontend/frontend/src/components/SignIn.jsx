@@ -34,7 +34,7 @@ const SignIn = ({ irParaCadastro }) => {
         <div className="login-content">     
             <div className="login-title">
                 <h1>Bem-vindo de volta!</h1>
-                <p>Entre para acessar suas viagens</p> {/* <-- ALTERAR --> */}
+                <p>Entre para começar a dividir</p>
             </div>
             <div className="login-form">
                 <form className="form" onSubmit={handleSubmit}>

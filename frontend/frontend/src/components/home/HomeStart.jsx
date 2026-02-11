@@ -19,8 +19,8 @@ const HomeStart = ({ irParaCadastro }) => {
           <div className="expenses-start">
             <div className="expenses-div-header"> {/* <-- ALTERAR --> */}
                 <div className="expenses-div-txt">
-                  <p>Viagem - Rio de Janeiro</p>
-                  <p className="gray-text">4 pessoas</p>
+                  <p>Resumo de despesas</p>
+                  <p className="gray-text">3 despesas</p>
                 </div>
                 <div className="expenses-div-txt">
                   <p className="gray-text">Total das despesas </p> 
