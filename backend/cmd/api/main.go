@@ -1,7 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"log"
+
+	"github.com/gin-gonic/gin"
 
 	"github.com/pairbytes-dev/tripsplit-monorepo/backend/internal/core/user"
 	"github.com/pairbytes-dev/tripsplit-monorepo/backend/internal/db"
@@ -28,6 +31,16 @@ func main() {
 	}
 
 	router := httpapi.NewRouter(gormDB)
+
+	router.Use(gin.Logger())
+	router.Use(gin.Recovery())
+
+	fmt.Println("Rotas registradas:")
+	for _, route := range router.Routes() {
+		fmt.Printf("  %-6s %s\n", route.Method, route.Path)
+	}
+
+	fmt.Println("\nBackend rodando em: http://localhost:8080")
 
 	if err := router.Run(":8080"); err != nil {
 		log.Fatal(err)
