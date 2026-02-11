@@ -6,7 +6,7 @@ import (
 	"time"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
-	"github.com/pairbytes-dev/tripsplit-monorepo/backend/internal/core/user"
+	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/user"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

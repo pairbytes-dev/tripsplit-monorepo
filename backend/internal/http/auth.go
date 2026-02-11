@@ -5,9 +5,9 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/pairbytes-dev/tripsplit-monorepo/backend/internal/core/user"
-	"github.com/pairbytes-dev/tripsplit-monorepo/backend/internal/db"
-	"github.com/pairbytes-dev/tripsplit-monorepo/backend/internal/security"
+	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/user"
+	"github.com/pairbytes-dev/tripsplit-monorepo/internal/db"
+	"github.com/pairbytes-dev/tripsplit-monorepo/internal/security"
 )
 
 // Handler de autenticação
