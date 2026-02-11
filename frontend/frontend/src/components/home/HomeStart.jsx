@@ -5,12 +5,12 @@ const HomeStart = ({ irParaCadastro }) => {
       <div className="div-home-start">
         <section className="section-start">
           <p className="first-txt-home"> {/* <-- ALTERAR --> */}
-            Comece a dividir suas despesas. Viaje sem dor de cabeça na hora de
+            Comece a dividir suas despesas. Organize sem dor de cabeça na hora de
             dividir.
           </p>
           <p className="second-txt-home"> {/* <-- ALTERAR --> */}
-            Divida suas despesas de forma justa, automática e
-            transparente. Registre gastos, veja relatórios em tempo real e
+            Divida gastos de forma justa, automática e
+            transparente. Registre despesas, veja relatórios em tempo real e
             acerte as contas em segundos.
           </p>
           <button className="btn-home" id="start-now" onClick={irParaCadastro}>Começar a dividir</button> 
