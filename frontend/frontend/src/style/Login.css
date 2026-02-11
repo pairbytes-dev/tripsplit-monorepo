@@ -94,6 +94,11 @@ form input:focus{
     border: 2px solid var(--green);
 }
 
+p.error-message{
+    color: var(--dark-gray);
+    font-size: 0.8rem;
+}
+
 .input-wrapper{
   position: relative;
   width: 100%;

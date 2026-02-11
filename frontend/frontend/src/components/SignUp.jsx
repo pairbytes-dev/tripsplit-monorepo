@@ -4,11 +4,16 @@ const SignUp = ({irParaLogin}) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log('Enviando:', { name, email, password: senha }); //debugando
+        if (senha.length > 0 && senha.length < 8) {
+            console.log("A senha deve conter no mínimo 8 caracteres.");
+            return;
+        }
+
+        console.log('Enviando:', { name, email, password: senha });
 
         try{
             const response = await fetch('http://localhost:8080/v1/auth/register', {
@@ -18,7 +23,7 @@ const SignUp = ({irParaLogin}) => {
                     name,
                     email,
                     password: senha 
-                }),
+                })
             });
 
             console.log(response.status); //debugando
@@ -53,21 +58,26 @@ const SignUp = ({irParaLogin}) => {
                     <label htmlFor="name">Nome completo</label>
                     <div className="input-wrapper">
                         <i className="fa-regular fa-user icon-input"></i>
-                        <input type="text" name="name" id="name" placeholder="Digite seu nome completo" value={name}
-                            onChange={(e) => setName(e.target.value)} required />
+                        <input type="text" name="name" id="name" placeholder="Digite seu nome completo" 
+                            value={name} onChange={(e) => setName(e.target.value)} required />
                     </div>
                     <label htmlFor="email">Email</label>
                     <div className='input-wrapper'>
                         <i className="fa-regular fa-envelope icon-input"></i>
-                        <input type="email" name="email" id="email" placeholder="Digite seu email" value={email}
-                            onChange={(e) => setEmail(e.target.value)} required />
+                        <input type="email" name="email" id="email" placeholder="Digite seu email" 
+                            value={email} onChange={(e) => setEmail(e.target.value)} required />
                     </div>
                     <label htmlFor="senha">Senha</label>
                     <div className="input-wrapper">
                         <i className="fa-solid fa-lock icon-input"></i>
-                        <input type="password" name="senha" id="senha" placeholder="Digite sua senha" value={senha}
-                            onChange={(e) => setSenha(e.target.value)} required/>
+                        <input type="password" name="senha" id="senha" placeholder="Digite sua senha" 
+                            value={senha} onChange={(e) => setSenha(e.target.value)} required />
                     </div>  
+                        {senha.length > 0 && (
+                            <p className="error-message">
+                            {senha.length >= 8 ? "" : "A senha precisa ter pelo menos 8 caracteres"}
+                            </p>
+                        )}
                     <button type="submit" className="btn">Criar conta</button>
                 </form>
             </div>
