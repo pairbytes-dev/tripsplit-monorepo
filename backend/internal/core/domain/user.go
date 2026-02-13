@@ -5,6 +5,7 @@ import (
 	"strings"
 	"unicode"
 
+	"github.com/google/uuid"
 	"github.com/pairbytes-dev/tripsplit-monorepo/internal/security"
 )
 
@@ -15,14 +16,14 @@ var (
 )
 
 type User struct {
-	ID           int64
-	Name         string
-	Email        string
-	PasswordHash string
-	IsActive     bool
+	ID           uuid.UUID `json:"id"`
+	Name         string    `json:"name"`
+	Email        string    `json:"email"`
+	PasswordHash string    `json:"-"`
+	IsActive     bool      `json:"is_active"`
 }
 
-func NewUser(id int64, name, email, rawPassword string) (*User, error) {
+func NewUser(name, email, rawPassword string) (*User, error) {
 	name = strings.TrimSpace(name)
 	email = strings.TrimSpace(strings.ToLower(email))
 
@@ -45,7 +46,7 @@ func NewUser(id int64, name, email, rawPassword string) (*User, error) {
 	}
 
 	return &User{
-		ID:           id,
+		ID:           uuid.New(),
 		Name:         name,
 		Email:        email,
 		PasswordHash: hashed,
@@ -73,11 +74,11 @@ func isStrongPassword(p string) bool {
 }
 
 type UserModel struct {
-	ID           int64  `gorm:"primaryKey;autoIncrement"`
-	Name         string `gorm:"not null"`
-	Email        string `gorm:"not null;uniqueIndex"`
-	PasswordHash string `gorm:"not null"`
-	IsActive     bool   `gorm:"not null;default:true"`
+	ID           uuid.UUID `gorm:"type:uuid;primaryKey;default:uuid_generate_v4()"`
+	Name         string    `gorm:"not null"`
+	Email        string    `gorm:"not null;uniqueIndex"`
+	PasswordHash string    `gorm:"not null"`
+	IsActive     bool      `gorm:"not null;default:true"`
 }
 
 func (UserModel) TableName() string {

@@ -13,7 +13,7 @@ func TestNewUser_WithValidData_CreatesActiveUserWithNormalizedFields(t *testing.
 	inputPassword := "Senha1234"
 
 	//Act
-	u, err := NewUser(0, inputName, inputEmail, inputPassword)
+	u, err := NewUser(inputName, inputEmail, inputPassword)
 
 	//Assert
 	assert.NoError(t, err, "NewUser deve retornar nil error com dados válidos")
@@ -75,7 +75,7 @@ func TestNewUser_WithInvalidData_ReturnsExpectedErrors(t *testing.T) {
 
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
-			u, err := NewUser(0, tc.inputName, tc.inputEmail, tc.inputPass)
+			u, err := NewUser(tc.inputName, tc.inputEmail, tc.inputPass)
 
 			assert.Nil(t, u, "Para dados inválidos, o usuário retornado deve ser nil")
 			assert.Error(t, err, "Para dados inválidos, deve retornar um erro")

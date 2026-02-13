@@ -33,7 +33,7 @@ func (h *AuthHandler) Register(c *gin.Context) {
 		return
 	}
 
-	u, err := domain.NewUser(0, req.Name, req.Email, req.Password)
+	u, err := domain.NewUser(req.Name, req.Email, req.Password)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
