@@ -44,7 +44,7 @@ services:
     container_name: tripsplit-frontend
     restart: unless-stopped
     ports:
-      - "5173:5173"
+      - "80:80"
     depends_on:
       - backend
 
