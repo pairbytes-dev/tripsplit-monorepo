@@ -14,7 +14,6 @@ import (
 )
 
 func main() {
-	// Funções auxiliares para ler variáveis de ambiente com um valor padrão (fallback)
 	getEnv := func(key, defaultValue string) string {
 		if value := os.Getenv(key); value != "" {
 			return value
@@ -34,11 +33,11 @@ func main() {
 	// Agora a configuração prioriza o que vem do Docker Compose
 	cfg := db.Config{
 		Host:     getEnv("DB_HOST", "localhost"),
-		Port:     getEnvInt("DB_PORT", 5432),
-		User:     getEnv("DB_USER", "tripsplit"),
-		Password: getEnv("DB_PASSWORD", "tripsplit"),
-		DBName:   getEnv("DB_NAME", "tripsplit"),
-		SSLMode:  getEnv("DB_SSLMODE", "disable"),
+		Port:     getEnvInt("DB_PORT", 6543),
+		User:     getEnv("DB_USER", "postgres"),
+		Password: getEnv("DB_PASSWORD", ""),
+		DBName:   getEnv("DB_NAME", "postgres"),
+		SSLMode:  getEnv("DB_SSLMODE", "require"),
 	}
 
 	gormDB, err := db.OpenGormPostgres(cfg)
@@ -46,8 +45,16 @@ func main() {
 		log.Fatalf("Erro ao conectar no banco (%s:%d): %v", cfg.Host, cfg.Port, err)
 	}
 
-	if err := gormDB.AutoMigrate(&domain.UserModel{}); err != nil {
-		log.Fatal("Erro na migração:", err)
+	fmt.Println("Sincronizando tabelas com o Supabase...")
+	err = gormDB.AutoMigrate(
+		&domain.User{},
+		&domain.Group{},
+		&domain.GroupMember{},
+		&domain.Expense{},
+		&domain.ExpenseSplit{},
+	)
+	if err != nil {
+		log.Fatal("Erro na migração das tabelas:", err)
 	}
 
 	router := httpapi.NewRouter(gormDB)
@@ -55,7 +62,7 @@ func main() {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 
-	fmt.Println("Rotas registradas:")
+	fmt.Println("\nRotas registradas:")
 	for _, route := range router.Routes() {
 		fmt.Printf("  %-6s %s\n", route.Method, route.Path)
 	}

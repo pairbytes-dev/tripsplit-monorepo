@@ -1,24 +1,6 @@
 version: "3.9"
 
 services:
-  postgres:
-    image: postgres:16
-    container_name: tripsplit-postgres
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: tripsplit
-      POSTGRES_PASSWORD: tripsplit
-      POSTGRES_DB: tripsplit
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U tripsplit -d tripsplit"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-
   backend:
     build:
       context: ./backend
@@ -28,14 +10,12 @@ services:
     ports:
       - "8080:8080"
     environment:
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_USER: tripsplit
-      DB_PASSWORD: tripsplit
-      DB_NAME: tripsplit
-    depends_on:
-      postgres:
-        condition: service_healthy
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_SSLMODE: ${DB_SSLMODE}
 
   frontend:
     build:
@@ -44,9 +24,9 @@ services:
     container_name: tripsplit-frontend
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "80:80" 
+    environment:
+      - VITE_SUPABASE_URL=${VITE_SUPABASE_URL}
+      - VITE_SUPABASE_ANON_KEY=${VITE_SUPABASE_ANON_KEY}
     depends_on:
       - backend
-
-volumes:
-  postgres-data:
