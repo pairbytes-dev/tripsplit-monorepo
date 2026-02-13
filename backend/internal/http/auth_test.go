@@ -10,6 +10,7 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/domain"
@@ -247,7 +248,7 @@ func TestAuthHandler_Login_WithWrongPassword_Returns401(t *testing.T) {
 
 	repo := &fakeUserRepo{
 		userToReturn: &domain.User{
-			ID:           1,
+			ID:           uuid.New(),
 			Name:         "Andre",
 			Email:        "andre@example.com",
 			PasswordHash: hashed,
@@ -289,7 +290,7 @@ func TestAuthHandler_Login_WithValidCredentials_Returns200AndToken(t *testing.T)
 
 	repo := &fakeUserRepo{
 		userToReturn: &domain.User{
-			ID:           1,
+			ID:           uuid.New(),
 			Name:         "Andre",
 			Email:        "andre@example.com",
 			PasswordHash: hashed,

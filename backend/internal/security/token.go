@@ -4,13 +4,14 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/google/uuid"
 )
 
 var jwtSecret = []byte("maximusdecimusmeridiusg")
 
-func GenerateToken(userID int64, email string) (string, error) {
+func GenerateToken(userID uuid.UUID, email string) (string, error) {
 	claims := jwt.MapClaims{
-		"sub":   userID,
+		"sub":   userID.String(),
 		"email": email,
 		"exp":   time.Now().Add(24 * time.Hour).Unix(),
 	}
