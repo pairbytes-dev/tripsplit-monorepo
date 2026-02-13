@@ -3,10 +3,9 @@ package db
 import (
 	"context"
 	"fmt"
-	"time"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
-	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/user"
+	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/domain"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -21,37 +20,23 @@ type Config struct {
 }
 
 type UserRepositoryInterface interface {
-	Create(ctx context.Context, u *user.User) error
-	GetByEmail(ctx context.Context, email string) (*user.User, error)
+	Create(ctx context.Context, u *domain.User) error
+	GetByEmail(ctx context.Context, email string) (*domain.User, error)
 }
 
 func OpenGormPostgres(cfg Config) (*gorm.DB, error) {
-	dsn := fmt.Sprintf(
-		"host=%s port=%d user=%s password=%s dbname=%s sslmode=%s",
-		cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.DBName, cfg.SSLMode,
-	)
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d sslmode=%s",
+		cfg.Host, cfg.User, cfg.Password, cfg.DBName, cfg.Port, cfg.SSLMode)
 
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	db, err := gorm.Open(postgres.New(postgres.Config{
+		DSN:                  dsn,
+		PreferSimpleProtocol: true,
+	}), &gorm.Config{})
+
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("falha ao conectar ao banco de dados: %w", err)
 	}
 
-	sqlDB, err := db.DB()
-	if err != nil {
-		return nil, err
-	}
-
-	sqlDB.SetMaxOpenConns(25)
-	sqlDB.SetMaxIdleConns(25)
-	sqlDB.SetConnMaxIdleTime(5 * time.Minute)
-
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-
-	if err := sqlDB.PingContext(ctx); err != nil {
-		sqlDB.Close()
-		return nil, err
-	}
-
+	fmt.Println("Conexão com o banco de dados estabelecida com sucesso.")
 	return db, nil
 }

@@ -3,7 +3,7 @@ package db
 import (
 	"context"
 
-	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/user"
+	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/domain"
 	"gorm.io/gorm"
 )
 
@@ -15,17 +15,17 @@ func NewUserRepository(db *gorm.DB) *UserRepository {
 	return &UserRepository{db: db}
 }
 
-func (r *UserRepository) Create(ctx context.Context, u *user.User) error {
-	m := user.ToModel(u)
+func (r *UserRepository) Create(ctx context.Context, u *domain.User) error {
+	m := domain.ToModel(u)
 	return r.db.WithContext(ctx).Create(m).Error
 }
 
-func (r *UserRepository) GetByEmail(ctx context.Context, email string) (*user.User, error) {
-	var m user.UserModel
+func (r *UserRepository) GetByEmail(ctx context.Context, email string) (*domain.User, error) {
+	var m domain.UserModel
 	if err := r.db.WithContext(ctx).
 		Where("email = ?", email).
 		First(&m).Error; err != nil {
 		return nil, err
 	}
-	return user.ToDomain(&m), nil
+	return domain.ToDomain(&m), nil
 }
