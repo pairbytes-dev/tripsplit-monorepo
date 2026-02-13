@@ -12,7 +12,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/user"
+	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/domain"
 	"github.com/pairbytes-dev/tripsplit-monorepo/internal/security"
 )
 
@@ -21,19 +21,19 @@ type fakeUserRepo struct {
 	// configuráveis
 	createErr     error
 	getByEmailErr error
-	userToReturn  *user.User
+	userToReturn  *domain.User
 
 	// para inspeção
-	createdUser *user.User
+	createdUser *domain.User
 	getEmailArg string
 }
 
-func (f *fakeUserRepo) Create(ctx context.Context, u *user.User) error {
+func (f *fakeUserRepo) Create(ctx context.Context, u *domain.User) error {
 	f.createdUser = u
 	return f.createErr
 }
 
-func (f *fakeUserRepo) GetByEmail(ctx context.Context, email string) (*user.User, error) {
+func (f *fakeUserRepo) GetByEmail(ctx context.Context, email string) (*domain.User, error) {
 	f.getEmailArg = email
 	if f.getByEmailErr != nil {
 		return nil, f.getByEmailErr
@@ -246,7 +246,7 @@ func TestAuthHandler_Login_WithWrongPassword_Returns401(t *testing.T) {
 	hashed := mustHash(t, "SenhaCorreta")
 
 	repo := &fakeUserRepo{
-		userToReturn: &user.User{
+		userToReturn: &domain.User{
 			ID:           1,
 			Name:         "Andre",
 			Email:        "andre@example.com",
@@ -288,7 +288,7 @@ func TestAuthHandler_Login_WithValidCredentials_Returns200AndToken(t *testing.T)
 	hashed := mustHash(t, plainPassword)
 
 	repo := &fakeUserRepo{
-		userToReturn: &user.User{
+		userToReturn: &domain.User{
 			ID:           1,
 			Name:         "Andre",
 			Email:        "andre@example.com",

@@ -6,7 +6,7 @@ import (
 	"time"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
-	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/user"
+	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/domain"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -21,8 +21,8 @@ type Config struct {
 }
 
 type UserRepositoryInterface interface {
-	Create(ctx context.Context, u *user.User) error
-	GetByEmail(ctx context.Context, email string) (*user.User, error)
+	Create(ctx context.Context, u *domain.User) error
+	GetByEmail(ctx context.Context, email string) (*domain.User, error)
 }
 
 func OpenGormPostgres(cfg Config) (*gorm.DB, error) {

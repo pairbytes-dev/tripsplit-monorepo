@@ -8,7 +8,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/user"
+	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/domain"
 	"github.com/pairbytes-dev/tripsplit-monorepo/internal/db"
 	httpapi "github.com/pairbytes-dev/tripsplit-monorepo/internal/http"
 )
@@ -46,7 +46,7 @@ func main() {
 		log.Fatalf("Erro ao conectar no banco (%s:%d): %v", cfg.Host, cfg.Port, err)
 	}
 
-	if err := gormDB.AutoMigrate(&user.UserModel{}); err != nil {
+	if err := gormDB.AutoMigrate(&domain.UserModel{}); err != nil {
 		log.Fatal("Erro na migração:", err)
 	}
 

@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/user"
+	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/domain"
 	"github.com/pairbytes-dev/tripsplit-monorepo/internal/db"
 	"github.com/pairbytes-dev/tripsplit-monorepo/internal/security"
 )
@@ -33,7 +33,7 @@ func (h *AuthHandler) Register(c *gin.Context) {
 		return
 	}
 
-	u, err := user.NewUser(0, req.Name, req.Email, req.Password)
+	u, err := domain.NewUser(0, req.Name, req.Email, req.Password)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
