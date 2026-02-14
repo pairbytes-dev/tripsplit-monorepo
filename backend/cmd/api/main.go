@@ -8,7 +8,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/pairbytes-dev/tripsplit-monorepo/internal/core/domain"
 	"github.com/pairbytes-dev/tripsplit-monorepo/internal/db"
 	httpapi "github.com/pairbytes-dev/tripsplit-monorepo/internal/http"
 )
@@ -45,17 +44,7 @@ func main() {
 		log.Fatalf("Erro ao conectar no banco (%s:%d): %v", cfg.Host, cfg.Port, err)
 	}
 
-	fmt.Println("Sincronizando tabelas com o Supabase...")
-	err = gormDB.AutoMigrate(
-		&domain.User{},
-		&domain.Group{},
-		&domain.GroupMember{},
-		&domain.Expense{},
-		&domain.ExpenseSplit{},
-	)
-	if err != nil {
-		log.Fatal("Erro na migração das tabelas:", err)
-	}
+	fmt.Println("Conexão validada. Schema gerenciado via Migrations Manuais no Supabase.")
 
 	router := httpapi.NewRouter(gormDB)
 
