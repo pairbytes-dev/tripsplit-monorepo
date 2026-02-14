@@ -76,7 +76,7 @@ func isStrongPassword(p string) bool {
 type UserModel struct {
 	ID           uuid.UUID `gorm:"type:uuid;primaryKey;default:uuid_generate_v4()"`
 	Name         string    `gorm:"not null"`
-	Email        string    `gorm:"not null;uniqueIndex"`
+	Email        string    `gorm:"not null;"`
 	PasswordHash string    `gorm:"not null"`
 	IsActive     bool      `gorm:"not null;default:true"`
 }

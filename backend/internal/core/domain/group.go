@@ -3,7 +3,7 @@ package domain
 import (
 	"time"
 
-	uuid "github.com/jackc/pgx/pgtype/ext/gofrs-uuid"
+	uuid "github.com/google/uuid"
 )
 
 type Group struct {

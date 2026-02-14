@@ -22,7 +22,12 @@ func NewRouter(gormDB *gorm.DB) *gin.Engine {
 	}))
 
 	userRepo := db.NewUserRepository(gormDB)
+	groupRepo := db.NewGroupRepository(gormDB)
+	expenseRepo := db.NewExpenseRepository(gormDB)
+
 	authHandler := NewAuthHandler(userRepo)
+	groupHandler := NewGroupHandler(groupRepo)
+	expenseHandler := NewExpenseHandler(expenseRepo)
 
 	v1 := r.Group("/v1")
 	{
@@ -30,6 +35,13 @@ func NewRouter(gormDB *gorm.DB) *gin.Engine {
 		{
 			authGroup.POST("/register", authHandler.Register)
 			authGroup.POST("/login", authHandler.Login)
+		}
+
+		protected := v1.Group("/")
+		protected.Use(AuthMiddleware())
+		{
+			protected.POST("/groups", groupHandler.Create)
+			protected.POST("/expenses", expenseHandler.Create)
 		}
 	}
 
