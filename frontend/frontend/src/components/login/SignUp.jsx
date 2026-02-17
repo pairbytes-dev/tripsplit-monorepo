@@ -33,12 +33,22 @@ const SignUp = ({irParaLogin}) => {
 
             console.log(response.status); //debugando
 
-            if (!response.ok) {
-            const text = await response.text();
-            console.error('Erro server:', text || response.statusText);
-            console.log(text || `Erro ${response.status}`);
-            return;
-        }
+            if (!response.ok) { //verifica se deu erro
+                const text = await response.text() || ""; //le o texto da resposta, que pode conter a mensagem de erro do servidor
+
+                console.error('Erro server:', text || response.statusText);
+                console.log(text || `Erro ${response.status}`);
+                
+                if(response.status === 409){ //email já existe
+                    setMensagem("Este email já está cadastrado");
+                    setTipo("erro");
+                } else{
+                    setMensagem("Erro ao cadastrar email.");
+                    setTipo("erro");
+                } 
+                
+                return;          
+            }
 
             const data = await response.json();
             console.log(data);
@@ -94,7 +104,7 @@ const SignUp = ({irParaLogin}) => {
                 {mensagem && (
                     <div className={`alert ${tipo}`}>
                     {mensagem}
-                    <button onClick={() => setMensagem("")} className="close-btn-alert">
+                    <button onClick={() => {setMensagem(""); setTipo("");}} className="close-btn-alert">
                         X
                     </button>
                     </div>
