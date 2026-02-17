@@ -28,7 +28,7 @@ func (r *UserRepository) Create(ctx context.Context, u *domain.User) error {
 		if errors.As(result.Error, &pgErr) {
 			if pgErr.Code == "23505" {
 				log.Printf("[QA ALERT] Tentativa de cadastro com email duplicado: %s", u.Email)
-				return errors.New("este email já está cadastrado no sistema")
+				return errors.New("email já cadastrado")
 			}
 		}
 

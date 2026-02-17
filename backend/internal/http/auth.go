@@ -40,8 +40,12 @@ func (h *AuthHandler) Register(c *gin.Context) {
 	}
 
 	if err := h.users.Create(c.Request.Context(), u); err != nil {
-		log.Println("Error creating user:", err)
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "could not create user"})
+		if err.Error() == "email já cadastrado" {
+			c.JSON(http.StatusConflict, gin.H{"error": "Este email já está cadastrado"})
+			return
+		}
+		log.Println("Erro ao criar usuário:", err)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Erro interno ao criar usuário"})
 		return
 	}
 
