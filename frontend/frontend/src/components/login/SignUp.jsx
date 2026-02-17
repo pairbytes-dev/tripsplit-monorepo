@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
+import Modal from './Modal';
 
 const SignUp = ({irParaLogin}) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
-    const tamSenha = senha.length >= 8;
-    const numberRegex = /\d/.test(senha);
-    const letterRegex = /[a-zA-Z]/.test(senha);
+    const [mensagem, setMensagem] = useState("");
+    const [tipo, setTipo] = useState("");
 
-    const isSenhaValida = tamSenha && numberRegex && letterRegex;
+    const tamSenha = senha.length >= 8;
+    const hasNumber = /\d/.test(senha);
+    const hasLetter = /[a-zA-Z]/.test(senha);
+
+    const isSenhaValida = tamSenha && hasNumber && hasLetter;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        // if (senha.length > 0 && senha.length < 8) {
-        //     console.log("A senha deve conter no mínimo 8 caracteres.");
-        //     return;
-        // }
 
         console.log('Enviando:', { name, email, password: senha });
 
@@ -45,16 +44,19 @@ const SignUp = ({irParaLogin}) => {
             console.log(data);
 
             localStorage.setItem("token", data.token);
-            console.log("Cadastro bem-sucedido!");
+            setMensagem("Cadastro realizado com sucesso!");
+            setTipo("sucesso");
+
 
         } catch(error){
             console.error("Erro no cadastro:", error);
-            console.log("Não foi possível conectar ao servidor. Tente novamente.");
+            setMensagem("Erro ao fazer cadastro. Tente novamente.");
+            setTipo("erro");
         }  
     }
 
     return(
-        <div className="login-content">     
+        <div className="login-content"> 
             <div className="login-title">
                 <h1>Criar conta</h1>
                 <p>Comece a dividir despesas agora</p>
@@ -88,8 +90,19 @@ const SignUp = ({irParaLogin}) => {
                 </form>
             </div>
             <div className="login-text">
+
+                {mensagem && (
+                    <div className={`alert ${tipo}`}>
+                    {mensagem}
+                    <button onClick={() => setMensagem("")} className="close-btn-alert">
+                        X
+                    </button>
+                    </div>
+                )}
+
                 <p>Já tem uma conta?<span onClick={irParaLogin}> Entrar</span></p>
             </div>
+
         </div>
     )
 }

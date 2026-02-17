@@ -17,16 +17,16 @@ const SignIn = ({ irParaCadastro }) => {
             const data = await response.json();
 
             if(!response.ok){
-                alert(data.message || "Erro ao fazer login");
+                console.log(data.message || "Erro ao fazer login");
                 return;
             }
 
             localStorage.setItem("token", data.token);
 
-            alert("Login bem-sucedido!");
+            console.log("Login bem-sucedido!");
         } catch(error){
             console.error("Erro no login:", error);
-            alert("Não foi possível conectar ao servidor. Tente novamente.");
+            console.log("Não foi possível conectar ao servidor. Tente novamente.");
         }  
     }
 
