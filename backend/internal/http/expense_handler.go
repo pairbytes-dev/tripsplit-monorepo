@@ -17,20 +17,18 @@ func NewExpenseHandler(repo *db.ExpenseRepository) *ExpenseHandler {
 	return &ExpenseHandler{repo: repo}
 }
 
-type CreateExpenseRequest struct {
-	GroupID uuid.UUID      `json:"group_id" binding:"required"`
-	Title   string         `json:"title" binding:"required"`
-	Amount  float64        `json:"amount" binding:"required,gt=0"`
-	PayerID uuid.UUID      `json:"payer_id" binding:"required"`
-	Splits  []SplitRequest `json:"splits" binding:"required,gt=0"`
-}
-
-type SplitRequest struct {
-	UserID uuid.UUID `json:"user_id" binding:"required"`
-	Amount float64   `json:"amount" binding:"required,gt=0"`
-}
-
-func (h *ExpenseHandler) Create(c *gin.Context) {
+// CreateExpense godoc
+// @Summary      Criar nova despesa
+// @Description  Registra uma nova despesa associada a um grupo, com detalhes de quem pagou e como a despesa deve ser dividida entre os membros.
+// @Tags         expenses
+// @Accept       json
+// @Produce      json
+// @Param        expense body CreateExpenseRequest true "Dados da despesa"
+// @Success      201   {object}  domain.Expense
+// @Failure      400   {object}  map[string]string
+// @Failure      500   {object}  map[string]string
+// @Router       /expenses [post]
+func (h *ExpenseHandler) CreateExpense(c *gin.Context) {
 	var req CreateExpenseRequest
 
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -59,7 +57,7 @@ func (h *ExpenseHandler) Create(c *gin.Context) {
 
 	expense.Splits = splits
 
-	if err := h.repo.Create(c.Request.Context(), expense); err != nil {
+	if err := h.repo.CreateExpense(c.Request.Context(), expense); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "falha ao registrar despesa no banco de dados"})
 		return
 	}

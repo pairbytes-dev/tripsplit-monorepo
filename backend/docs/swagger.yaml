@@ -1,0 +1,304 @@
+basePath: /v1
+definitions:
+  github_com_pairbytes-dev_tripsplit-monorepo_internal_core_domain.Expense:
+    properties:
+      amount:
+        type: number
+      created_at:
+        type: string
+      date:
+        type: string
+      description:
+        type: string
+      group_id:
+        type: string
+      id:
+        type: string
+      method:
+        description: equal, percentage, fixed
+        type: string
+      payer_id:
+        type: string
+      splits:
+        items:
+          $ref: '#/definitions/github_com_pairbytes-dev_tripsplit-monorepo_internal_core_domain.ExpenseSplit'
+        type: array
+    type: object
+  github_com_pairbytes-dev_tripsplit-monorepo_internal_core_domain.ExpenseSplit:
+    properties:
+      amount_owed:
+        type: number
+      expense_id:
+        type: string
+      id:
+        type: string
+      user_id:
+        type: string
+    type: object
+  github_com_pairbytes-dev_tripsplit-monorepo_internal_core_domain.Group:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      expenses:
+        items:
+          $ref: '#/definitions/github_com_pairbytes-dev_tripsplit-monorepo_internal_core_domain.Expense'
+        type: array
+      id:
+        type: string
+      members:
+        items:
+          $ref: '#/definitions/github_com_pairbytes-dev_tripsplit-monorepo_internal_core_domain.GroupMember'
+        type: array
+      title:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  github_com_pairbytes-dev_tripsplit-monorepo_internal_core_domain.GroupMember:
+    properties:
+      group_id:
+        type: string
+      joined_at:
+        type: string
+      role:
+        type: string
+      user_id:
+        type: string
+    type: object
+  internal_http.CreateExpenseRequest:
+    properties:
+      amount:
+        example: 100.5
+        type: number
+      group_id:
+        example: 123e4567-e89b-12d3-a456-426614174000
+        type: string
+      payer_id:
+        example: 123e4567-e89b-12d3-a456-426614174000
+        type: string
+      splits:
+        items:
+          $ref: '#/definitions/internal_http.SplitRequest'
+        type: array
+      title:
+        example: Almoço
+        type: string
+    required:
+    - amount
+    - group_id
+    - payer_id
+    - splits
+    - title
+    type: object
+  internal_http.SplitRequest:
+    properties:
+      amount:
+        example: 50.25
+        type: number
+      user_id:
+        example: 123e4567-e89b-12d3-a456-426614174000
+        type: string
+    required:
+    - amount
+    - user_id
+    type: object
+  internal_http.createGroupRequest:
+    properties:
+      description:
+        example: Grupo para organizar uma viagem
+        type: string
+      title:
+        example: Grupo de Viagem
+        type: string
+    required:
+    - title
+    type: object
+  internal_http.loginRequest:
+    properties:
+      email:
+        example: teste@teste.com
+        type: string
+      password:
+        example: senha12345
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  internal_http.registerRequest:
+    properties:
+      email:
+        example: teste@teste.com
+        type: string
+      name:
+        example: Teste teste
+        type: string
+      password:
+        example: senha12345
+        type: string
+    required:
+    - email
+    - name
+    - password
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API para gestão de despesas em grupo.
+  title: TripSplit API
+  version: "1.0"
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Autentica um usuário e retorna um token JWT.
+      parameters:
+      - description: Dados de login
+        in: body
+        name: login
+        required: true
+        schema:
+          $ref: '#/definitions/internal_http.loginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Login de usuário
+      tags:
+      - auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Cria uma nova conta de usuário com nome, e-mail e senha.
+      parameters:
+      - description: Dados do usuário
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/internal_http.registerRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "409":
+          description: Conflict
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Cadastrar novo usuário
+      tags:
+      - auth
+  /expenses:
+    post:
+      consumes:
+      - application/json
+      description: Registra uma nova despesa associada a um grupo, com detalhes de
+        quem pagou e como a despesa deve ser dividida entre os membros.
+      parameters:
+      - description: Dados da despesa
+        in: body
+        name: expense
+        required: true
+        schema:
+          $ref: '#/definitions/internal_http.CreateExpenseRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_pairbytes-dev_tripsplit-monorepo_internal_core_domain.Expense'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Criar nova despesa
+      tags:
+      - expenses
+  /groups:
+    post:
+      consumes:
+      - application/json
+      description: Cria um novo grupo de despesas, associando-o ao usuário autenticado
+        como proprietário.
+      parameters:
+      - description: Dados do grupo
+        in: body
+        name: group
+        required: true
+        schema:
+          $ref: '#/definitions/internal_http.createGroupRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/github_com_pairbytes-dev_tripsplit-monorepo_internal_core_domain.Group'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Criar novo grupo
+      tags:
+      - groups
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

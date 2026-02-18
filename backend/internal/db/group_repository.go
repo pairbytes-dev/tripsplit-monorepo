@@ -16,7 +16,7 @@ func NewGroupRepository(db *gorm.DB) *GroupRepository {
 	return &GroupRepository{db: db}
 }
 
-func (r *GroupRepository) Create(ctx context.Context, g *domain.Group, ownerID uuid.UUID) error {
+func (r *GroupRepository) CreateGroup(ctx context.Context, g *domain.Group, ownerID uuid.UUID) error {
 	return r.db.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
 		if err := tx.Create(g).Error; err != nil {
 			return err
