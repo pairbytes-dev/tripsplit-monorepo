@@ -6,7 +6,11 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/pairbytes-dev/tripsplit-monorepo/internal/db"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"gorm.io/gorm"
+
+	_ "github.com/pairbytes-dev/tripsplit-monorepo/docs"
 )
 
 func NewRouter(gormDB *gorm.DB) *gin.Engine {
@@ -31,6 +35,7 @@ func NewRouter(gormDB *gorm.DB) *gin.Engine {
 
 	v1 := r.Group("/v1")
 	{
+		r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 		authGroup := v1.Group("/auth")
 		{
 			authGroup.POST("/register", authHandler.Register)
@@ -40,8 +45,8 @@ func NewRouter(gormDB *gorm.DB) *gin.Engine {
 		protected := v1.Group("/")
 		protected.Use(AuthMiddleware())
 		{
-			protected.POST("/groups", groupHandler.Create)
-			protected.POST("/expenses", expenseHandler.Create)
+			protected.POST("/groups", groupHandler.CreateGroup)
+			protected.POST("/expenses", expenseHandler.CreateExpense)
 		}
 	}
 

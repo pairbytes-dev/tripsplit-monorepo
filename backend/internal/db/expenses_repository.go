@@ -16,7 +16,7 @@ func NewExpenseRepository(db *gorm.DB) *ExpenseRepository {
 	return &ExpenseRepository{db: db}
 }
 
-func (r *ExpenseRepository) Create(ctx context.Context, expense *domain.Expense) error {
+func (r *ExpenseRepository) CreateExpense(ctx context.Context, expense *domain.Expense) error {
 	return r.db.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
 
 		if err := tx.Create(expense).Error; err != nil {

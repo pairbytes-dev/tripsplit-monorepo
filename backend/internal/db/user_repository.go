@@ -45,7 +45,7 @@ func (r *UserRepository) GetByEmail(ctx context.Context, email string) (*domain.
 		Where("email = ?", email).
 		First(&m).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, nil
+			return nil, errors.New("usuário não encontrado")
 		}
 		return nil, err
 	}

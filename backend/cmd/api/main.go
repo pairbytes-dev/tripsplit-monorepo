@@ -12,6 +12,15 @@ import (
 	httpapi "github.com/pairbytes-dev/tripsplit-monorepo/internal/http"
 )
 
+// @title           TripSplit API
+// @version         1.0
+// @description     API para gestão de despesas em grupo.
+// @host            localhost:8080
+// @BasePath        /v1
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
+
 func main() {
 	getEnv := func(key, defaultValue string) string {
 		if value := os.Getenv(key); value != "" {

@@ -4,6 +4,9 @@ const SignIn = ({ irParaCadastro }) => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
+    const [mensagem, setMensagem] = useState("");
+    const [tipo, setTipo] = useState("");
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -14,19 +17,37 @@ const SignIn = ({ irParaCadastro }) => {
                 body: JSON.stringify({ email, password: senha }),
             });
 
-            const data = await response.json();
+            let data = null;
 
-            if(!response.ok){
-                alert(data.message || "Erro ao fazer login");
-                return;
+            try {
+                data = await response.json();
+            } catch {
+                data = null;
             }
 
-            localStorage.setItem("token", data.token);
+            if(response.status === 200){ //email e senha corretos
 
-            alert("Login bem-sucedido!");
+                if(data?.token){
+                    localStorage.setItem("token", data.token);
+                }
+                
+                setMensagem("Login realizado com sucesso!");
+                setTipo("sucesso");
+
+            } else if(response.status === 401){ //email ou senha incorretos
+                
+                setMensagem("Email ou senha incorretos");
+                setTipo("erro");
+
+            } else{
+                setMensagem("Erro no login. Tente novamente.");
+                setTipo("erro");
+            }
+
         } catch(error){
             console.error("Erro no login:", error);
-            alert("Não foi possível conectar ao servidor. Tente novamente.");
+            setMensagem("Erro ao fazer login. Tente novamente.");
+            setTipo("erro");
         }  
     }
 
@@ -67,6 +88,16 @@ const SignIn = ({ irParaCadastro }) => {
                 </form>
             </div>
             <div className="login-text">
+
+                {mensagem && (
+                    <div className={`alert ${tipo}`}>
+                    {mensagem}
+                    <button onClick={() => {setMensagem(""); setTipo("");}} className="close-btn-alert">
+                        X
+                    </button>
+                    </div>
+                )}
+
                 <p>Não tem uma conta?<span onClick={irParaCadastro}> Cadastre-se</span></p>
                 <a href="#" className="password-text">Esqueceu sua senha?</a>
             </div>

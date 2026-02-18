@@ -19,13 +19,17 @@ func NewAuthHandler(users db.UserRepositoryInterface) *AuthHandler {
 	return &AuthHandler{users: users}
 }
 
-// Payload de registro
-type registerRequest struct {
-	Name     string `json:"name" binding:"required"`
-	Email    string `json:"email" binding:"required,email"`
-	Password string `json:"password" binding:"required,min=8"`
-}
-
+// Register godoc
+// @Summary      Cadastrar novo usuário
+// @Description  Cria uma nova conta de usuário com nome, e-mail e senha.
+// @Tags         auth
+// @Accept       json
+// @Produce      json
+// @Param        user  body      registerRequest  true  "Dados do usuário"
+// @Success      201   {object}  map[string]interface{}
+// @Failure      400   {object}  map[string]string
+// @Failure      409   {object}  map[string]string
+// @Router       /auth/register [post]
 func (h *AuthHandler) Register(c *gin.Context) {
 	var req registerRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -59,11 +63,17 @@ func (h *AuthHandler) Register(c *gin.Context) {
 	})
 }
 
-type loginRequest struct {
-	Email    string `json:"email" binding:"required,email"`
-	Password string `json:"password" binding:"required"`
-}
-
+// Login godoc
+// @Summary      Login de usuário
+// @Description  Autentica um usuário e retorna um token JWT.
+// @Tags         auth
+// @Accept       json
+// @Produce      json
+// @Param        login body loginRequest true "Dados de login"
+// @Success      200   {object}  map[string]interface{}
+// @Failure      400   {object}  map[string]string
+// @Failure      401   {object}  map[string]string
+// @Router       /auth/login [post]
 func (h *AuthHandler) Login(c *gin.Context) {
 	var req loginRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -94,5 +104,4 @@ func (h *AuthHandler) Login(c *gin.Context) {
 		"message": "Login efetuado com sucesso",
 		"token":   token,
 	})
-
 }
