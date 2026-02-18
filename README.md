@@ -9,3 +9,5 @@ Racha.ai é um site de divisão de despesas em grupo, desenvolvido para facilita
 - Postgres
 - JavaScript
 - React
+
+![](./frontend/frontend/src/assets/img/img-screen/home-screen.png)
