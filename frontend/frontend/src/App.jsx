@@ -1,7 +1,9 @@
 import { useState } from 'react';
+
 import './App.css'
 import './style/Login.css';
 import './style/Home.css';
+import './style/MediaQuerie.css';
 
 import Home from './components/Home';
 import Login from './components/Login'

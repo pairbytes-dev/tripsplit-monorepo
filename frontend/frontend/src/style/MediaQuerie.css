@@ -1,0 +1,51 @@
+@media screen and (max-width: 768px) { /*para telas pequenas*/
+
+   
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px){ /*para telas médias (tablet)*/
+
+     .logo-home{
+        width: 40px;
+        height: auto;
+    }
+
+    .title{
+        font-size: 1.8rem;
+    }
+
+    .btn-home{
+        padding: 6px 8px;
+        font-size: 13px;
+    }
+
+    .first-txt-home{
+        font-size: 1.6rem;
+        margin-bottom: 25px;
+    }
+
+    .second-txt-home{
+        font-size: 0.8rem;
+        margin-bottom: 25px;
+    }
+
+    .expenses-div-items p{
+        font-size: 12px;
+    }
+
+    .expenses-start{
+        padding: 15px;
+    }
+
+    .expenses-div-txt p{
+        font-size: 14px;
+    }
+
+    #valor{
+        text-align: left;
+    }
+
+    .esconder{
+        display: none;
+    }
+}

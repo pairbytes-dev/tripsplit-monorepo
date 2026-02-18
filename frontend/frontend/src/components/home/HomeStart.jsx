@@ -22,7 +22,7 @@ const HomeStart = ({ irParaCadastro }) => {
                   <p>Resumo de despesas</p>
                   <p className="gray-text">3 despesas</p>
                 </div>
-                <div className="expenses-div-txt">
+                <div className="expenses-div-txt esconder">
                   <p className="gray-text">Total das despesas </p> 
                   <p id="valor">R$ 3.420,00</p>
                 </div>
@@ -32,12 +32,12 @@ const HomeStart = ({ irParaCadastro }) => {
                     <div key={item.id} className="expenses-div-items">
                         <div className="items-icon">{item.icon}</div>
                         <p>{item.name}</p>
-                        <p className="items-price">{item.price}</p>
+                        <p className="items-price esconder">{item.price}</p>
                     </div>
                 ))}
             </div>
-            <hr />
-            <div className="expenses-div-header" id="final-value"> 
+            <hr className="esconder"/>
+            <div className="expenses-div-header esconder" id="final-value" > 
               <p>Você deve</p>
               <p>R$855,00</p> {/* <-- ALTERAR --> */}
             </div>
