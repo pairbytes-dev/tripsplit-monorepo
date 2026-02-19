@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import './App.css'
 import './style/Login.css';
 import './style/Home.css';
@@ -11,11 +11,11 @@ import SignUp from "./components/SignUp";
 import GroupHome from './components/user/group-page/GroupHome';
 
 function App() {
-  const [tela, setTela] = useState('home');
+  // const [tela, setTela] = useState('home');
 
   return (
      <>
-      {tela === 'home' && (
+      {/* {tela === 'home' && (
         <Home 
           irParaLogin={() => setTela("signin")}
           irParaCadastro={() => setTela("signup")}
@@ -32,9 +32,9 @@ function App() {
         <Login irParaHome={() => setTela("home")}>
           <SignUp irParaLogin={() => setTela("signin")} />
         </Login>
-      )}
+      )} */}
 
-      {/* <GroupHome /> */}
+      <GroupHome />
      </>
   )
 }
