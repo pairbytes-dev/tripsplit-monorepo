@@ -1,0 +1,33 @@
+.user-main{
+    background-color: #c9c9c43b;
+    padding: 30px;
+    flex: 1;
+}
+
+.title-main-user{
+    font-family: var(--title);
+    font-size: 2.3rem;
+    color: var(--dark-gray);
+    padding-top: 30px;
+    font-weight: 400;
+}
+
+.user-main-div-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-main-div-title p{
+    font-family: var(--text);
+    color: var(--gray);
+    font-size: 14px;
+    padding-top: 10px;
+}
+
+#btn-green{
+    background-color: var(--green);
+    border: none;
+    padding: 8px;
+    font-size: 12px;
+    }

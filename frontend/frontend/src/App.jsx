@@ -3,6 +3,7 @@ import './App.css'
 import './style/Login.css';
 import './style/Home.css';
 import './style/UserGeral.css';
+import './style/UserMain.css';
 
 import Home from './components/Home';
 import Login from './components/Login'

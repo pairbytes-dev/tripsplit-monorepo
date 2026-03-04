@@ -1,14 +1,15 @@
 import Footer from "../user-geral/Footer";
 import HeaderUser from "../user-geral/HeaderUser";
 import Nav from "../user-geral/Nav";
+import Main from "../user-geral/Main";
 
 const GroupHome = () => {
     return (
-        <div>  
+        <div className="div-group-user">   
             <HeaderUser />
-            <div className="div-nav-user">
+            <div className="div-nav-user">  
                 <Nav />
-                <h1>main</h1>
+                <Main />
             </div>
             <Footer />
         </div>
