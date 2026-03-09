@@ -118,7 +118,76 @@
 .main-div-modal{
     background-color: #fff;
     position: fixed;
-    padding: 15px;
+    padding: 25px;
     border-radius: 8px;
     box-shadow: 0 0px 30px rgba(0, 0, 0, 0.25);
+    font-family: var(--text);
+
+    width: 45%;
+}
+
+.section-modal{
+    padding: 10px 0px 18px 0px;
+    border-bottom: 1px solid var(--light-gray);
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.title-modal{
+    font-family: var(--title);
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.btn-modal-close{
+    background-color: #fff;
+    padding: 5px;
+    border: none;
+}
+
+.section-modal-2{
+    padding: 15px 0px 10px 0px;
+}
+
+/*formulario modal*/
+.div-modal-form{
+    margin: 10px 0px;
+}
+
+.div-modal-form input{
+    width: 100%;
+}
+
+#categoria{
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+    border: 1px solid var(--light-gray);
+}
+
+#categoria:focus, #descricao:focus{
+    border: 2px solid var(--green);
+    outline: none;
+}
+
+#descricao{
+    height: 150px;
+    width: 100%;
+}
+
+.div-btn-modal{
+
+    display: flex;
+    margin-top: 15px;
+}
+
+.btn-close{
+    background-color: #fff;
+    color: #000;
+}
+
+.btn-size{
+    width: 50%;
 }
